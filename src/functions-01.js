@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-vars */
 /*
  * functions-01.js
@@ -17,7 +18,11 @@
  * example: 'Buzz Lightyear' returns 'Lightyear, Buzz'
  */
 function nameShuffle(str) {
-  // write your code here & return value
+  const names = str.split(' ');
+  if (names.length >= 2) {
+    return `${names[1]}, ${names[0]}`;
+  }
+  return str;
 }
 
 /**
@@ -34,8 +39,11 @@ function nameShuffle(str) {
  * example: 'yahtzee', 'easy' returns true
  * example: '&', '&' returns true
  */
+// eslint-disable-next-line consistent-return
 function isStrangePair(str1, str2) {
-  // write your code here & return value
+  if (str1.length > 0 && str2.length > 0) {
+    return str1[0] === str2[str2.length - 1];
+  }
 }
 
 /**
@@ -46,8 +54,14 @@ function isStrangePair(str1, str2) {
  * example: '100%' returns 1
  * example: '98.6%' returns 0.986
  */
+// eslint-disable-next-line consistent-return
 function convertToDecimal(percent) {
-  // write your code here & return value
+  if (typeof percent === 'string' && percent.length > 0) {
+    const number = parseFloat(percent.replace('%', ''));
+    if (!isNaN(number)) {
+      return number / 100;
+    }
+  }
 }
 
 /**
@@ -60,7 +74,9 @@ function convertToDecimal(percent) {
  * example: [1, 2, 3, 4], [4, 3, 2, 1, 5] returns false
  */
 function checkSameSum(a1, a2) {
-  // write your code here & return value
+  const sumA1 = a1.reduce((acc, num) => acc + num, 0);
+  const sumA2 = a2.reduce((acc, num) => acc + num, 0);
+  return sumA1 === sumA2;
 }
 
 /**
@@ -71,7 +87,10 @@ function checkSameSum(a1, a2) {
  * must use a closure to save the username
  */
 function saveLogin(name) {
-  // write your code here
+  // eslint-disable-next-line func-names
+  return function () {
+    return name;
+  };
 }
 
 module.exports = {
